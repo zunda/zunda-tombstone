@@ -1,0 +1,414 @@
+/*
+Title: Zunda
+Revision: $Revision: 1.12 $
+Author: ずんだあん
+Access: zunda at freeshell.org
+License: GPL
+Comment: ずんだの色合い
+
+  copied from pool_side.css: Pool Side Style Sheet of tDiary and edited
+  $Id: zunda.css,v 1.12 2007/01/19 22:07:56 zunda Exp $
+ */
+
+div.footer {
+  font-size: 75%;
+  text-align: right;
+  margin: 0px;
+}
+
+div.header {
+  font-size: 75%;
+  margin: 0em 5em 0em 5em;
+}
+
+a:link, a:visited {
+  color: #D88000;
+  text-decoration: none;
+}
+
+a[href]:hover, a[href]:focus, a[href]:active {
+  color: #FFA000;
+}
+
+body {
+  font-family: serif;
+  line-height: 1.4;
+  background-color: #d8e0d0;
+  color: #006020;
+}
+
+p.message {
+  text-align: center;
+  font-size: 125%;
+  font-weight: bold;
+  background-color: #80B020;
+  color: white;
+  padding: 8px;
+  margin: 0px;
+}
+
+div.adminmenu, div.calender, div.year, div.weather, div.translation {
+  text-align: right;
+  font-size: 75%;
+}
+
+span.adminmenu {
+  background-color: #ffffff;
+  padding: 0.2em;
+}
+
+h1 {
+  font-family: sans-serif;
+  background-color: #80B020;
+  border-style: outset;
+  border-color: #80B020;
+  border-width: 2px;
+  color: white;
+  padding: 8px;
+}
+
+h1 a:link, h1 a:visited {
+  color: white;
+}
+
+h1::before {
+  content: '';
+  display: inline-block;
+  background-size: contain;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.25em;
+  vertical-align: bottom;
+  background-image: url(zunda-eat.gif);
+}
+
+h2 {
+  font-family: sans-serif;
+  background-color: #E8F0E0;
+  border-style: outset;
+  border-color: #E8F0E0;
+  border-width: 1px;
+  margin: 0.5em 0.2em 0.2em 0.2em;
+  padding: 0em 0.1em 0em 0.3em;
+  clear: both;
+}
+
+h3, h4, h5 {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin: 1em 0em 0em 0.2em;
+  padding: 0em 0em 0em 0.3em;
+}
+
+h3.recentitem {
+  font-family: sans-serif;
+  font-weight: bold;
+  margin: 0.2em 0em 0em 0.2em;
+  padding: 0em 0em 0em 0.3em;
+  white-space: nowrap;
+}
+
+table {
+  line-height: 1.2;
+  margin: 0.2em 2em 0.2em 2em;
+  padding: 0.2em;
+  border-collapse: collapse;
+  empty-cells: show;
+  border-style: none;
+}
+
+td, th {
+  padding: 0.25em;
+  border-collapse: collapse;
+  border-style: solid;
+  border-width: 1px;
+  text-align: center;
+}
+
+th {
+  font-family: sans-serif;
+}
+
+p, address {
+  Margin: 0.2em 0.2em 0.2em 0.2em;
+  padding: 0.2em 0.2em 0.2em 0.2em;
+}
+
+li p {
+  margin: 0em 0em 0.5em 0em;
+  padding: 0em 0em 0.2em 0em;
+}
+
+dl, ul, ol {
+  margin: 0em 1em 0em 1em;
+  padding: 0em 1em 0.2em 2em;
+}
+
+p.calendar {
+  text-align: right;
+  font-weight: bold;
+}
+
+div.comment p {
+}
+
+div.recent-comment {
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+ol.recent-comment {
+  list-style-type: none;
+  display: inline;
+  text-decoration: none;
+  font-family: serif;
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+  background-color: #d8e0d0;
+  border-style: none;
+  color: #006020;
+}
+
+div.recent-comment li, div.recent-comment h2 {
+  list-style-type: none;
+  font-size: 75%;
+  display: inline;
+  font-weight: normal;
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+  background-color: #d8e0d0;
+  border-style: none;
+  color: #006020;
+}
+
+div.day span.sanchor {
+  background-image: url(zunda_s.png);
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  padding: 16px 16px 0px 0px;
+  margin: 0em 0em 0em -1em;
+  color: #d8e0d0;
+  background-color: transparent;
+  font-size: 100%;
+}
+
+div.day span.new span.sanchor {
+  background-image: url(zunda_s_new.png);
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  padding: 16px 16px 0px 0px;
+  margin: 0em 0em 0em -1em;
+  color: #d8e0d0;
+  background-color: transparent;
+  font-size: 100%;
+}
+
+span.date, span.nyear {
+  font-size: medium;
+}
+
+span.title {
+}
+
+span.code {
+  font-family: monospace;
+}
+
+div.body {
+  padding: 0.2em;
+  margin-right: 0.5em;
+  margin-left: 1em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+pre, blockquote {
+  background-color: #ffffff;
+  color: #0000E0;
+  margin: 0.5em 1em 0.5em 1em;
+  padding: 0.75em 0.75em 0.75em 0.75em;
+  overflow: hidden;
+}
+
+pre.src {
+  background-color: #ffffff;
+  color: #0000E0;
+  margin: 0.5em 0.5em 0.5em 0.5em;
+  padding: 0.5em 0.5em 0.5em 0.5em;
+  overflow: scroll;
+}
+
+pre.vcard {
+  background-color: transparent;
+  color: #006020;
+  overflow-x: scroll;
+}
+
+div.comment {
+  background-color: white;
+  color: #0000E0;
+  margin: 0.5em;
+  padding: 0.75em;
+  font-size: 75%;
+}
+
+div.commentshort {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+div.form {
+  background-color: #80B020;
+  color: white;
+  margin: 0.5em;
+  padding: 1em;
+  overflow: visible;
+}
+
+span.footnote {
+  font-size: 75%;
+  vertical-align: super;
+}
+
+div.src {
+  text-align: right;
+  font-size: 75%;
+}
+
+div.footnote {
+  font-size: 75%;
+}
+
+div.refererlist, div.referer, div.ident {
+  font-size: 75%;
+  Margin: 0.4em 1em 0.4em 1em;
+  padding: 0.4em 0.4em 0.4em 0.4em;
+}
+
+p.commenttitle {
+}
+
+span.commentator {
+}
+
+p.referertitle {
+}
+
+p.referer {
+}
+
+hr {
+  clear: both;
+  margin: 8px;
+  color: #80B020;
+}
+
+hr.sep {
+  display: none;
+}
+
+input.field {
+  background-color: white;
+}
+
+textarea {
+  background-color: white;
+  margin-left: 1em;
+}
+
+li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+/*
+li.referer, li.sidemenu, li.recentsubtitle, li.subtitle, li.recentitem, li.packages {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+  white-space: nowrap;
+}
+*/
+
+div.todo li {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+}
+
+div.recent_list h3, div.sidemenu h3 {
+  font-family: sans-serif;
+  white-space: nowrap;
+}
+
+div.recent_list li, div.sidemenu li {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+  white-space: nowrap;
+}
+
+p.sub {
+  Margin: 0.2em 0.2em 0.2em 0.2em;
+  padding: 0.2em 0.2em 0.2em 0.2em;
+  font-size: 75%;
+}
+
+ul.sub {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 2em;
+  font-size: 75%;
+}
+
+li.sub {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 0em;
+}
+
+ul ul, div.todo ul, div.referer ul, div.sidemenu ul {
+  margin: 0em 0em 0em 0em;
+  padding: 0em 0em 0em 2em;
+}
+
+ul.recentsubtitles, ul.recentitem {
+  margin-top: 0em;
+  margin-bottom: 0em;
+  white-space: nowrap;
+}
+
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+  font-weight: bold;
+}
+
+span.todo-in-time {
+  color: black;
+}
+
+span.todo-today {
+  color: blue;
+}
+
+span.todo-too-late {
+  color: red;
+}
+
+.highlight {
+  background-color: #FAFF20;
+  color: blue;
+}
+
+img.right {
+  float: right;
+  margin: 0.5em 0em 0.5em 0.5em;
+}
+
+img.left {
+  float: left;
+  margin: 0.5em 0.5em 0.5em 0em;
+}
+
+ul.contacts {
+  list-style: none;
+  padding-left: 1em;
+  padding-bottom: 0.1em;
+}

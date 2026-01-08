@@ -1,0 +1,6 @@
+# pre-commit hook to make sure the detacehd signature is up to date
+#
+# usage:
+# $ cat pre-commit >> .git/hooks/pre-commit
+# $ chmod +x .git/hooks/pre-commit
+make verify

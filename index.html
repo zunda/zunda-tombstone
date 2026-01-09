@@ -10,14 +10,34 @@
   -->
   <script src="openpgp.min.js"></script>
   <script>
-    const url="https://zunda.ninja/";
+    const url="https://zunda.ninja";
     const signature="https://zunda.ninja/index.sig.txt";
-    fetch(signature)
-    .then((r)=>{ return r.text() })
-    .then((t)=>{ return openpgp.readSignature({armoredSignature:t}) })
-    .then((s)=>{ console.log(s) })
-    ;
-    //fetch(url).then(()=>window.location.assign(url));
+    const pubkey="https://keys.openpgp.org/vks/v1/by-fingerprint/F60960D80B224382CA8D831CB56C20316D6E8279";
+
+    const fetchTextOrThrow = (url) => new Promise((resolve, reject) => {
+      fetch(url)
+      .then(r => {
+        if(r.status == 200) {
+          resolve(r.text());
+        } else {
+          reject(new Error(`${url} responded with ${r.status}`));
+        }
+      })
+      .catch(e => {e.message += ` ${url}`; reject(e)})
+    });
+
+    Promise.all([
+      fetchTextOrThrow(url).then(d => openpgp.createMessage({text:d})),
+      fetchTextOrThrow(signature).then(a => openpgp.readSignature({armoredSignature:a})),
+      fetchTextOrThrow(pubkey).then(a => openpgp.readKey({armoredKey:a}))
+    ]).then(([m,s,k]) => openpgp.verify({message:m,signature:s,verificationKeys:k}))
+    .then(r => r.signatures[0].verified)
+    .then(x => {if(x) {
+      window.location.assign(url);
+    } else {
+      throw new Error(x);};
+    })
+    .catch(e => console.log(e));
   </script>
   <title>zundaのお墓</title>
 </head>

@@ -4,9 +4,16 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="zunda.css" type="text/css" media="all">
+  <script src="openpgp.min.js"></script>
   <script>
     const url="https://zunda.ninja/";
-    fetch(url).then(()=>window.location.assign(url));
+    const signature="https://zunda.ninja/index.sig.txt";
+    fetch(signature)
+    .then((r)=>{ return r.text() })
+    .then((t)=>{ return openpgp.readSignature({armoredSignature:t}) })
+    .then((s)=>{ console.log(s) })
+    ;
+    //fetch(url).then(()=>window.location.assign(url));
   </script>
   <title>zundaのお墓</title>
 </head>

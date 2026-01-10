@@ -13,8 +13,11 @@
 </head>
 <body>
   <h1>zundaのお墓</h1>
+  <div id="dead">
   <p>🪦 このページがあなたの手に落ちる頃には、私はもうこの世にはいないでしょう。とくに死んでいるでしょう</p>
   <p class="sub">夏目漱石『<a href="https://www.aozora.gr.jp/cards/000148/files/773_14560.html">こころ</a>』より</p>
+  </div>
+  <div id="checks"></div>
   <h2>本当に?</h2>
   <p>このページはお手元のブラウザのJavaScriptで <a href="https://zunda.ninja/">https://zunda.ninja/</a> を閲覧できるかを確認してzundaの生死を推定しています。このURLを閲覧できない場合にはDNS業者への支払いが停止したことが原因かもしれません。閲覧できる場合は推定が間違いかもしれません。</p>
   <p>zunda.ninjaドメインが既に失なわれている場合にはWayback Machineから<a href="https://web.archive.org/web/*/https://zunda.ninja">検索</a>することで過去の様子を知ることができるかもしれません。</p>
@@ -23,33 +26,73 @@
   <p>このページのソースファイルの<a href="index.sig.txt">デジタル署名</p>
 </body>
 <script>
-  const url="https://zunda.ninja";
+  document.getElementById("checks").innerHTML = `
+  <h2>確認事項</h2>
+  <ul>
+  <li>zunda.ninjaの閲覧: <span id="home"></span>
+  <li>zunda.ninjaのデジタル署名: <span id="signature"></span>
+  <li>zundaの公開鍵: <span id="pubkey"></span>
+  <li>デジタル署名の検証: <span id="verification"></span>
+  <li>結論: <span id="result"></span>
+  </ul>
+`;
+
+  const progressSpan = {};
+  ["home", "signature", "pubkey", "verification"].forEach(
+    spanId => {progressSpan[spanId] = document.getElementById(spanId);}
+  );
+  const spinChar = "\u21BB";
+  const okChar = "\u2713";
+  const ngChar = "\u274C";
+  const deadDiv = document.getElementById("dead");
+  const resultSpan = document.getElementById("result");
+
+  const home="https://zunda.ninja";
   const signature="https://zunda.ninja/index.sig.txt";
   const pubkey="https://keys.openpgp.org/vks/v1/by-fingerprint/F60960D80B224382CA8D831CB56C20316D6E8279";
 
-  const fetchText = (url) => new Promise((resolve, reject) => {
+  const fetchText = (url, span) => new Promise((resolve, reject) => {
+    span.innerText = spinChar;
     fetch(url)
     .then(r => {
       if(r.status == 200) {
+        span.innerText = okChar;
         resolve(r.text());
       } else {
+        span.innerText = ngChar;
         reject(new Error(`${url} responded with ${r.status}`));
       }
     })
-    .catch(e => {e.message += ` ${url}`; reject(e)})
+    .catch(e => {
+      span.innerText = ngChar;
+      e.message += ` ${url}`; reject(e)
+    })
   });
 
   Promise.all([
-    fetchText(url).then(d => openpgp.createMessage({text:d})),
-    fetchText(signature).then(a => openpgp.readSignature({armoredSignature:a})),
-    fetchText(pubkey).then(a => openpgp.readKey({armoredKey:a}))
-  ]).then(([m,s,k]) => openpgp.verify({message:m,signature:s,verificationKeys:k}))
-  .then(r => r.signatures[0].verified)
-  .then(x => {if(x) {
-    window.location.assign(url);
-  } else {
-    throw new Error(x);};
+    fetchText(home, progressSpan.home).then(d => openpgp.createMessage({text:d})),
+    fetchText(signature, progressSpan.signature).then(a => openpgp.readSignature({armoredSignature:a})),
+    fetchText(pubkey, progressSpan.pubkey).then(a => openpgp.readKey({armoredKey:a}))
+  ])
+  .then(([m,s,k]) => {
+    progressSpan.verification.innerText = spinChar;
+    return openpgp.verify({message:m,signature:s,verificationKeys:k});
   })
-  .catch(e => console.log(e));
+  .then(r => r.signatures[0].verified)
+  .then(x => {
+    if(x) {
+      progressSpan.verification.innerText = okChar;
+      deadDiv.style.display = "none";
+      resultSpan.innerText = "zundaは生きてるかもしれない";
+      window.location.assign(home);
+    } else {
+      throw new Error(x);
+    };
+  })
+  .catch(e => {
+    progressSpan.verification.innerText = ngChar;
+    resultSpan.innerText = "zundaは死んでるかもしれない";
+    console.log(e)
+  });
 </script>
 </html>

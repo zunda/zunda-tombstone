@@ -9,36 +9,6 @@
     Refer to openpgp.min.js-LICENSE.txt for its license.
   -->
   <script src="openpgp.min.js"></script>
-  <script>
-    const url="https://zunda.ninja";
-    const signature="https://zunda.ninja/index.sig.txt";
-    const pubkey="https://keys.openpgp.org/vks/v1/by-fingerprint/F60960D80B224382CA8D831CB56C20316D6E8279";
-
-    const fetchText = (url) => new Promise((resolve, reject) => {
-      fetch(url)
-      .then(r => {
-        if(r.status == 200) {
-          resolve(r.text());
-        } else {
-          reject(new Error(`${url} responded with ${r.status}`));
-        }
-      })
-      .catch(e => {e.message += ` ${url}`; reject(e)})
-    });
-
-    Promise.all([
-      fetchText(url).then(d => openpgp.createMessage({text:d})),
-      fetchText(signature).then(a => openpgp.readSignature({armoredSignature:a})),
-      fetchText(pubkey).then(a => openpgp.readKey({armoredKey:a}))
-    ]).then(([m,s,k]) => openpgp.verify({message:m,signature:s,verificationKeys:k}))
-    .then(r => r.signatures[0].verified)
-    .then(x => {if(x) {
-      window.location.assign(url);
-    } else {
-      throw new Error(x);};
-    })
-    .catch(e => console.log(e));
-  </script>
   <title>zundaのお墓</title>
 </head>
 <body>
@@ -52,4 +22,34 @@
 <hr>
   <p>このページのソースファイルの<a href="index.sig.txt">デジタル署名</p>
 </body>
+<script>
+  const url="https://zunda.ninja";
+  const signature="https://zunda.ninja/index.sig.txt";
+  const pubkey="https://keys.openpgp.org/vks/v1/by-fingerprint/F60960D80B224382CA8D831CB56C20316D6E8279";
+
+  const fetchText = (url) => new Promise((resolve, reject) => {
+    fetch(url)
+    .then(r => {
+      if(r.status == 200) {
+        resolve(r.text());
+      } else {
+        reject(new Error(`${url} responded with ${r.status}`));
+      }
+    })
+    .catch(e => {e.message += ` ${url}`; reject(e)})
+  });
+
+  Promise.all([
+    fetchText(url).then(d => openpgp.createMessage({text:d})),
+    fetchText(signature).then(a => openpgp.readSignature({armoredSignature:a})),
+    fetchText(pubkey).then(a => openpgp.readKey({armoredKey:a}))
+  ]).then(([m,s,k]) => openpgp.verify({message:m,signature:s,verificationKeys:k}))
+  .then(r => r.signatures[0].verified)
+  .then(x => {if(x) {
+    window.location.assign(url);
+  } else {
+    throw new Error(x);};
+  })
+  .catch(e => console.log(e));
+</script>
 </html>

@@ -20,8 +20,8 @@
   </div>
   <div id="checks"></div>
   <h2>本当に?</h2>
-  <p>このページはお手元のブラウザのJavaScriptで <a href="https://zunda.ninja/">https://zunda.ninja/</a> を閲覧できるかを確認してzundaの生死を推定しています。このURLを閲覧できない場合にはDNS業者への支払いが停止したことが原因かもしれません。閲覧できる場合は推定が間違いかもしれません。</p>
-  <p>zunda.ninjaドメインが既に失なわれている場合にはWayback Machineから<a href="https://web.archive.org/web/*/https://zunda.ninja">検索</a>することで過去の様子を知ることができるかもしれません。</p>
+  <p>このページはお手元のブラウザのJavaScriptで <code><a href="https://zunda.ninja">zunda.ninja</a></code> を閲覧できるかを確認して、さらにデジタル署名を検証して、zundaの生死を推定しています。このURLを閲覧できない場合にはDNS業者への支払いが停止したことが原因かもしれません。閲覧できる場合は推定が間違いかもしれません。</p>
+  <p><code>zunda.ninja</code>ドメインが既に失なわれている場合にはWayback Machineから<a href="https://web.archive.org/web/*/https://zunda.ninja">検索</a>することで過去の様子を知ることができるかもしれません。</p>
   <p>これまでいろいろありがとう。</p>
 <hr>
   <p>このページのソースファイルの<a href="index.sig.txt">デジタル署名</p>
@@ -30,8 +30,8 @@
   document.getElementById("checks").innerHTML = `
   <h2>確認事項</h2>
   <ul>
-  <li>zunda.ninjaの閲覧: <span id="home"></span>
-  <li>zunda.ninjaのデジタル署名: <span id="signature"></span>
+  <li><code>zunda.ninja</code>の閲覧: <span id="home"></span>
+  <li><code>zunda.ninja</code>のデジタル署名: <span id="signature"></span>
   <li>zundaの公開鍵: <span id="pubkey"></span>
   <li>デジタル署名の検証: <span id="verification"></span>
   <li>結論: <span id="result"></span>
@@ -66,7 +66,8 @@
     })
     .catch(e => {
       span.innerText = ngChar;
-      e.message += ` ${url}`; reject(e)
+      e.message += ` ${url}`;
+      reject(e);
     })
   });
 
